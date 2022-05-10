@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <title>Cinema</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Cinema</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" th:href="@{/filmsf}">Сегодня в кино</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <p>
+                    <img src="https://kinopoisk-ru.clstorage.net/x1E6k1137/62d867T_V3/iBYY9wyFIX5kZrorYSKKPYgHlU3nM9pus2lF7_BjV6s037a_a20UOEMgPoLC8IbpJ5WfE9CPPQq727hgqFDiO8oWXKJTlD4lOTimZGJ82G7BHc4b9i-SOPd0VrKrPHibHO2fzU1SPBhvQXjAjOfdsnHV20yMyzUQq5bKB7oLn26mBCf-MLpjVnVzwTBFIp4bmGe8asN12nGjC2zw-1RJoirgtd5TYwA9fHZg2I6z25NW78d2sfs6W5yM0DDJEJdPsicf8jS5WkRBUMc4SRygOZJZi0HRSu1vhANn4uRIQpAl24XETkI8PlNDYNCKjM-QfMnsQKDoNlCwt9cI1wmScLETI9Ifgkp3S0DVJmU5ujmyXKNCyl7xRpAUR_73YXCOJ8ia62lBDBh-ZkfhsoXav3Dg-FGz_zV_l5fzFvICvnmoNivhObdKfFdB0zdpNJwfqESJR_9O2mikHlbs8HRQlA3-seBzcww3d2lf57Cv4YpO1e1FjMs2VraN2xHzBZ9gszA84RmEQnFtUec1ZQ-cEL98qX37X_pPrwhF1dNcZooo_aTcR3k2NlRLZeKro_y2W8_DeYrfLWijue8w6AesYZo9BeIrrmJgWVnjNkk4ijGbZ5dG8mnycrUgdNPnakSoD8eE4lN2Nht0aWzbmob0t3fOwmaO0Cp1lZHCD_ASjlmbJALaLa9sQHBw8wBZAZc-vV-WUP5E9kCKAGDo_XlRiy7AtvB2bxsyc0dr9ZWIwKp60-NShvstVpy21BvMAq1DmDsl0SSgdnhjecUERimNM7hIjX3kaPJEqCFnyud7SIEO9ITRUm8dOGBBYv-YvfC8V9_hcqLWFn2QrfcL8Qa1YrsRD9InjnhbcUTQOU4rlhyxULBYxnH7YoMBbPf4WX6JHNuF40NDHCt1TXn8rqTRt0bc6EKU-it_tZXNAc4xqk-dEQfYG5JmZ2RTwBNCJbcSnW6eQvtw62a2CmnD-mtWtTLJtd5zTDo7a2x63I-v4rN67eB1vew2T4mWwyDQKJd1txko5gm7bFh0ef0BTxidH6ZKj2TCafVSlClY9Ml5caoNxpfrak4PN0dJWNSxp92xdvftTJ_8Omi3k_QT1za-UYgdItgcr3VxRmX1O1crvTOFRbZbwk_8ZqY0bcXaWEyvDcS-_nVoNipcflz0jYzBtnz-_U219SR0to_9NdYWllGTHQT6PK5oRlVj3whWDogOtl6cb_VJ7UalCGPw2VtfoQ_gmOR6TzI0RVld04uh1atc0-JTld8oeZ2Z-Tz8LY91sx0k_zCgamlmVsIAdS6eM7ltunnlSvFsgTJA6ediTpMSy5vxaEYWLGhIQtWJs_qVac3qZZDTBGeJhcQe3xaPZ4QuIcw9j1VFSVDRFGEWjTmhaLV_-E_MfZ4oeO3KVGu8NP-E3UdTMRN-W1r0iqrXr3Tf_2iH0zlEjIvDPs8nnmG_PRbfBpBdcmNk-h9aGIM7hEGZcPhr7nySM0LV0113hxLamuBzRDYGckRq5auC3Ixt8fhEo9kae7-Q9h_rCbhwtiQZ1Cu8RXtWd9U_QSKMCKdEjk_DaN5krRxk7tlmSrIN-ZjnUmwmEEJ4YceSmMaUbfXpUJ36MViys8EU1CO0ZYY7C9EuoGF5b2T4PUQEizWEa5dN4GXIWasgX_XVTXGlC-OY3HhEGAlAblz1lYb1lEzy4GWx7htokIvmHdYhlUyJMw7DK6xLZHNW_DFlDrweoWi6UuNa0nyIAFnl515JqC77rMVRazM6S1pE8K2e8Ih62N56rcIRbbiq5x_CEa9mjzIe-Re3amVDccMoeQ-9FKNbmUrXatFJqwxb08hiYrY16Yj_SFoCE0tnWPiprPe4eMvoa4jzHEq0mdIs1A-pepY0K-czsGhSUlL7H2gllBWfaoxg_mTQbJM0Qd7aeXCLLs6V2Gp3JAVHSWXmgY3EklzA_mKj7SZRgKnFEfEOv1W1Phr_GLNIcFV79x9IILoCvkGOTsdkzFGuDUTxy2FpsQ3Flf1bUjouaXdf1YmExZll_eJLgP8ncIuoxgjjNIx9mhgh3C-RY1JycfsGSQ27FalCj3j1eddmojZE_-xHYYMo6or6bGYWKEVoSMOyueWJWtvhdYjwLEi9rtQtyhetW6wkIOY_r0JUa2HZNno7ghaCcZ995XvfU400YcjNS3eDHN2p2GhvDBptV2fQkaz4nnf030us2hhTq5vGE94QnUypBRTbF5tmUHZm_hpiFpcMkWGRXsNM7GyCIkDy-VtphT_9ltpMRiEsS2xZ5YKmxolr8spLp9QbbbK29jXsF7t9qjIa3T2Ta3BqYt0_YyeLN7N6vGXqSPNzlRZdx_VGY6YN4J_CQUoDGW9gatuBmfWNW-roa6zUHV-UlOUx3Qu2TpM-LvoJvHlpWGzBIUkvlAC3Wpd54GXMY5Qne9f7WmatDf274khiAw1AfHbFlJPAll714W2P2yppkYjdAso3nHKUMBXdBLp3XmdG7BVBHaQXk0SKb8F--HiIPWXk03h1hRbiqMFGUwwucVZE-oiq5JRV4tFrgPYXcZiG7TbJLJdgvRw90S-YYEBTWecYRD-jIbVErkTnStFksSBK08hAaYUq5YvoY2QZGG5pTN6em96wSNXjcqDiCkSxiuQb9hKJeo4AGP0Nl3lZRXbuMUcIlBSIXLxfw2nzebItWPfaeW-sH--k3Fp4ABJuX03EtqrHkl7pzm2D_SR_o43jMf4hsky7MC_gOrp5fmpz2wR4AKM3lUKef99QzUS_HWjj0GRVkDH2v_9GajMHclZr4pKt2KpQ08VwlvcvdKOQ0xTCB7tUmA0L3g2md1RQVsAlVySfKaJ5j0TfSvZChSJE3sxiXowa7Zv7VG0GKUtcZ_yRrvesat_mabHwP2m0ldAt1SeMZ7sRLsQ5k15wUHj6OmYftwCjTp54xkbZQ6YAZevdRl-gMuOo-2BjJBhUZErfrqjyjHf9yUui1RJtnow#DSD"
+                         alt="Зеленая миля"></p>
+                <h2>Зеленая миля (1999).</h2>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/ticketSelection}" method="POST">
+                    <input type="hidden" name="id" value="0"/>
+                    <div class="form-group">
+                        <label for="ticket.id">Ряд</label>
+                        <select class="form-control" id="" name="">
+                            <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
+                                    th:text="${ticket.row}"></option>
+                        </select>
+                        <label for="ticket.id">Место</label>
+                        <select class="form-control" id="ticket.id" name="ticket.id">
+                            <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
+                                    th:text="${ticket.sell}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Выбрать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
