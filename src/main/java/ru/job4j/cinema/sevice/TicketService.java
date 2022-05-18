@@ -1,6 +1,7 @@
 package ru.job4j.cinema.sevice;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.persistence.TicketDBStore;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TicketService {
     private final TicketDBStore store;
 
+    @Autowired
     public TicketService(TicketDBStore store) {
         this.store = store;
     }

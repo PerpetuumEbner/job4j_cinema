@@ -29,7 +29,8 @@ ALTER TABLE ticket
 
 CREATE TABLE films
 (
-    id         SERIAL PRIMARY KEY,
-    name       VARCHAR(256),
-    production VARCHAR(256)
+    id             SERIAL PRIMARY KEY,
+    name           VARCHAR(256),
+    productionYear VARCHAR(256),
+    poster         bytea
 );

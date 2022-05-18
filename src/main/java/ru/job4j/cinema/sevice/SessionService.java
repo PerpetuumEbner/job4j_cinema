@@ -70,11 +70,19 @@ public class SessionService {
     }
 
     public List<Integer> rowsList() {
-        return new ArrayList<>(amountRows);
+        List<Integer> lists = new ArrayList<>();
+        for (int index = 0; index < amountRows; index++) {
+            lists.add(index);
+        }
+        return lists;
     }
 
     public List<Integer> cellsList() {
-        return new ArrayList<>(amountCells);
+        List<Integer> lists = new ArrayList<>();
+        for (int index = 0; index < amountCells; index++) {
+            lists.add(index);
+        }
+        return lists;
     }
 
 

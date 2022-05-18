@@ -1,6 +1,7 @@
 package ru.job4j.cinema.sevice;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.persistence.UserDBStore;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class UserService {
     private final UserDBStore store;
 
+    @Autowired
     public UserService(UserDBStore store) {
         this.store = store;
     }
