@@ -73,7 +73,7 @@ public class SessionService {
 
     public List<Integer> rowsList() {
         List<Integer> lists = new ArrayList<>();
-        for (int index = 0; index < amountRows; index++) {
+        for (int index = 1; index <= amountRows; index++) {
             lists.add(index);
         }
         return lists;
@@ -81,7 +81,7 @@ public class SessionService {
 
     public List<Integer> cellsList() {
         List<Integer> lists = new ArrayList<>();
-        for (int index = 0; index < amountCells; index++) {
+        for (int index = 1; index <= amountCells; index++) {
             lists.add(index);
         }
         return lists;

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.sevice.SessionService;
 import ru.job4j.cinema.sevice.TicketService;
@@ -14,6 +15,7 @@ import ru.job4j.cinema.sevice.UserService;
 
 @ThreadSafe
 @Controller
+@RequestMapping("/order")
 public class SessionController {
     private final SessionService sessionService;
 
@@ -28,23 +30,9 @@ public class SessionController {
         this.userService = userService;
     }
 
-    @GetMapping("placeSelection")
-    public String films(Model model) {
-        model.addAttribute("rows", sessionService.rowsList());
-        model.addAttribute("cells", sessionService.cellsList());
-        return "placeSelection";
-    }
+    @PostMapping
+    public String order(Model model) {
 
-    @GetMapping("placeSelection/{ticketId}")
-    public String placeSelection(Model model, @PathVariable("ticketId") int id) {
-        model.addAttribute("ticket", ticketService.findById(id));
-        return "placeSelection";
-    }
-
-    @PostMapping("ticketSelection")
-    public String ticketSelection(Model model) {
-        model.addAttribute("ticket",
-                new Ticket(0, 0, 0, 0, 0));
-        return "ticketSelection";
+        return null;
     }
 }
