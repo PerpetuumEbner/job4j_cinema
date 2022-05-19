@@ -39,7 +39,7 @@
             <form th:action="@{/ticketSelection}" method="POST">
                 <input type="hidden" name="id" value="0"/>
                 <div class="form-group">
-                    <table class="table table-hover">
+                    <table class="table hover">
                         <thead>
                         <tr>
                             <th scope="col"></th>
@@ -50,22 +50,40 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="film: ${films}">
-                            <td th:text="${film.id}"></td>
+                        <tr>
+                            <td></td>
                             <td>
-                                <img th:width="150" th:high="150" th:src="@{|${film.id}|}">
+                                <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
                             </td>
                             <td th:text="${film.name}"></td>
                             <td th:text="${film.productionYear}"></td>
-                            <td>
-                                <a class="btn btn-outline-primary" th:href="@{/films/{id}(id=${film.getId()})}"
-                                   role="button">Выбор места</a>
-                            </td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </form>
+            <div class="card" style="width: 100%">
+                <div class="card-body">
+                    <!--        <form th:action="@{/ticketSelection}" method="POST">-->
+                    <!--          <input type="hidden" name="id" value="0"/>-->
+                    <div class="form-group">
+                        <label>Ряд</label>
+                        <select class="form-control" id="row" name="row">
+                            <option th:each="row : ${rows}" th:text="${row}">
+                            </option>
+                        </select>
+                        <label>Место</label>
+                        <select class="form-control" id="cell" name="cell">
+                            <option th:each="cell : ${cells}" th:text="${cell}">
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Выбрать</button>
+                    <!--        </form>-->
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

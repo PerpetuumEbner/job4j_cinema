@@ -25,7 +25,7 @@ public class UserService {
         this.store = store;
     }
 
-    public Optional<User> add (User user) {
+    public Optional<User> add(User user) {
         return store.add(user);
     }
 

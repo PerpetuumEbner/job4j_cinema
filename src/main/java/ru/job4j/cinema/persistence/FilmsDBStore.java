@@ -42,7 +42,7 @@ public class FilmsDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return film;
     }

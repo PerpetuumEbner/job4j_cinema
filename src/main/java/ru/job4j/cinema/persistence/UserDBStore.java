@@ -46,7 +46,7 @@ public class UserDBStore {
             }
             optionalUser = Optional.of(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return optionalUser;
     }

@@ -1,6 +1,7 @@
 package ru.job4j.cinema.sevice;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Sessions;
 import ru.job4j.cinema.model.Ticket;
@@ -23,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SessionService {
     private final SessionsDBStore store;
 
+    @Autowired
     public SessionService(SessionsDBStore store) {
         this.store = store;
     }
