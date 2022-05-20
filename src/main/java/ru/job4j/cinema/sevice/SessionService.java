@@ -45,7 +45,8 @@ public class SessionService {
 
     private final List<Integer> cellList = new ArrayList<>(amountCells);
 
-    public Map<Integer, Ticket> ticketSelection(Ticket ticket) {
+    public boolean ticketSelection(Ticket ticket) {
+        boolean result = false;
         if (rowList.get(ticket.getRow()) != ticket.getRow()
                 && cellList.get(ticket.getCell()) != ticket.getCell()) {
             rowList.add(ticket.getRow(), 1);
@@ -58,17 +59,20 @@ public class SessionService {
                     ticket.getCell(),
                     ticket.getUser_id()
             ));
+            result = true;
         }
-        return tickets;
+        return result;
     }
 
-    public Map<Integer, Ticket> byTicket(Ticket ticket, Sessions sessions) {
+    public boolean byTicket(Ticket ticket, Sessions sessions) {
+        boolean result = false;
         if (!sessionsList.contains(sessions.getId())) {
             sessionsList.add(sessions.getId());
             ticket.setId(ID.incrementAndGet());
             purchasedTickets.put(ticket.getId(), ticket);
+            result = true;
         }
-        return purchasedTickets;
+        return result;
     }
 
     public List<Integer> rowsList() {

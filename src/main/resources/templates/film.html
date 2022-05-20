@@ -34,56 +34,50 @@
             </div>
         </div>
     </nav>
-    <div class="row pt-3">
-        <div class="card-body" style="width: 100%">
-            <form th:action="@{/ticketSelection}" method="POST">
-                <input type="hidden" name="id" value="0"/>
-                <div class="form-group">
-                    <table class="table hover">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Постер</th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Год производства</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
-                            </td>
-                            <td th:text="${film.name}"></td>
-                            <td th:text="${film.productionYear}"></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </form>
-            <div class="card" style="width: 100%">
-                <div class="card-body">
-                    <!--        <form th:action="@{/ticketSelection}" method="POST">-->
-                    <!--          <input type="hidden" name="id" value="0"/>-->
+    <div class="card-body" style="width: 100%">
+        <div class="form-group">
+            <table class="table hover">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Постер</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Год производства</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
+                    </td>
+                    <td th:text="${film.name}"></td>
+                    <td th:text="${film.productionYear}"></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card" style="width: 100%">
+            <div class="card-body">
+                <form th:action="@{/order}" method="POST" th:object="${ticket}">
+                    <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label>Ряд</label>
+                        <label for="row">Ряд</label>
                         <select class="form-control" id="row" name="row">
-                            <option th:each="row : ${rows}" th:text="${row}">
-                            </option>
+                            <option th:each="row : ${rows}" th:text="${row}"></option>
                         </select>
-                        <label>Место</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="cell">Место</label>
                         <select class="form-control" id="cell" name="cell">
-                            <option th:each="cell : ${cells}" th:text="${cell}">
-                            </option>
+                            <option th:each="cell : ${cells}" th:text="${cell}"></option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-outline-primary">Выбрать</button>
-                    <!--        </form>-->
-                </div>
+                </form>
             </div>
-
         </div>
     </div>
 </div>

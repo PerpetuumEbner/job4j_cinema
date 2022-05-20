@@ -34,35 +34,9 @@
             </div>
         </div>
     </nav>
-    <div class="row pt-3">
-        <div class="card-body" style="width: 100%">
-                <div class="form-group">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Постер</th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Год производства</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="film: ${films}">
-                            <td th:text="${film.id}"></td>
-                            <td>
-                                <img th:width="150" th:high="150" th:src="@{|${film.id}|}">
-                            </td>
-                            <td th:text="${film.name}"></td>
-                            <td th:text="${film.productionYear}"></td>
-                            <td>
-                                <a class="btn btn-outline-primary" th:href="@{/films/{id}(id=${film.getId()})}"
-                                   role="button">Выбор места</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="card pt-3" style="margin-top: 2%">
+        <div class="card-body">
+            <h5 class="card-title">Место уже куплено!</h5>
         </div>
     </div>
 </div>
