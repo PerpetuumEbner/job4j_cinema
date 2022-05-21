@@ -38,12 +38,19 @@
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">Заголовок карточки</h5>
-            <p class="card-text">Небольшой пример текста, который должен основываться на названии карты и составлять
-                основную часть содержимого карты.</p>
-
-            <li class="list-group-item">6 ряд, 10 место</li>
+            <form th:action="@{/buyTicket}" method="POST" th:object="ticket">
+                <input type="hidden" name="id" value="0"/>
+                <div class="form-group">
+                    <label for="name" style="font-weight: 900">Ряд</label>
+                    <input type="text" class="form-control" name="row" id="row" th:placeholder="*{ticket.getRow()}">
+                </div>
+                <div class="form-group">
+                    <label for="name" style="font-weight: 900">Место</label>
+                    <input type="text" class="form-control" name="cell" id="cell" th:placeholder="*{ticket.getCell()}">
+                </div>
+            </form>
             <a class="btn btn-outline-primary" th:href=""
-               role="button">Выбрать</a>
+               role="button">Купить</a>
         </div>
     </div>
 </div>

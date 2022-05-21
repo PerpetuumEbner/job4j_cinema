@@ -61,17 +61,17 @@
         </div>
         <div class="card" style="width: 100%">
             <div class="card-body">
-                <form th:action="@{/order}" method="POST" th:object="${ticket}">
+                <form th:action="@{/buyTicket}" method="POST" th:object="${ticket}">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label for="row">Ряд</label>
-                        <select class="form-control" id="row" name="row">
+                        <label for="ticket.row">Ряд</label>
+                        <select class="form-control" id="ticket.row" name="row">
                             <option th:each="row : ${rows}" th:text="${row}"></option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cell">Место</label>
-                        <select class="form-control" id="cell" name="cell">
+                        <label for="ticket.cell">Место</label>
+                        <select class="form-control" id="ticket.cell" name="cell">
                             <option th:each="cell : ${cells}" th:text="${cell}"></option>
                         </select>
                     </div>
