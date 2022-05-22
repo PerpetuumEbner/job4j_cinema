@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.cinema.model.Films;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.sevice.FilmsService;
 import ru.job4j.cinema.sevice.SessionService;
@@ -31,27 +32,29 @@ public class SessionController {
         this.filmsService = filmsService;
     }
 
-    @GetMapping() // выбор фильма
+    @GetMapping()
     public String films(Model model) {
         model.addAttribute("films", filmsService.findAll());
         return "films";
     }
 
-    @GetMapping("/{filmId}") // выбор мест по id фильма
-    public String selectFilms(@PathVariable("filmId") int id, Model model) {
+    @PostMapping("/selectFilms")
+    public String selectFilms(@ModelAttribute Films film, int id) {
+        filmsService.findById(id);
+        return "";
+    }
+
+    @GetMapping("/{filmId}")
+    public String formBuyTicket(Model model, @PathVariable("filmId") int id) {
         model.addAttribute("film", filmsService.findById(id));
         model.addAttribute("rows", sessionService.rowsList());
         model.addAttribute("cells", sessionService.cellsList());
+        model.addAttribute("ticket", new Ticket(0, 0, 0, 0, 0));
         return "/film";
     }
 
-    @GetMapping("/formChoiceTicket") // форма выбора мест перед покупкой
-    public String choice(Model model) {
-        model.addAttribute("ticket", new Ticket(0, 0, 0, 0, 0));
-        return "/choiceTicket";
-    }
 
-    @PostMapping("/buyTicket") // покупка билета (страница отсутствует)
+    @PostMapping("/buyTicket")
     public String buy(@ModelAttribute Ticket ticket) {
         if (sessionService.ticketSelection(ticket)) {
             ticketService.add(ticket);

@@ -61,7 +61,7 @@
         </div>
         <div class="card" style="width: 100%">
             <div class="card-body">
-                <form th:action="@{/buyTicket}" method="POST" th:object="${ticket}">
+                <form th:action="@{/choiceTicket}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
                         <label for="ticket.row">Ряд</label>
@@ -75,7 +75,7 @@
                             <option th:each="cell : ${cells}" th:text="${cell}"></option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-outline-primary">Выбрать</button>
+                    <button type="submit" class="btn btn-outline-primary">Выбор</button>
                 </form>
             </div>
         </div>
