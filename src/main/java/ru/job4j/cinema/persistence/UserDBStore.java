@@ -66,24 +66,24 @@ public class UserDBStore {
         }
     }
 
-    public User findById(int id) {
+    public Optional<User> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE id = ?")
         ) {
             try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    return new User(
+                if (it.next()) {
+                    return Optional.of(new User(
                             it.getInt("id"),
                             it.getString("username"),
                             it.getString("email"),
                             it.getString("phone")
-                    );
+                    ));
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<User> findAll() {

@@ -31,35 +31,37 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:href="@{/addFilm}">Добавить фильм</a>
             </div>
         </div>
+        <a class="nav-item nav-link" th:href="@{/formAddUser}">Регистрация</a>
+        <a class="nav-item nav-link" th:if="${user.username == 'Гость'}" th:href="@{/loginPage}">
+            <span th:text="${user.username}"></span>
+            <span> | Войти</span>
+        </a>
+        <a class="nav-item nav-link" th:if="${user.username != 'Гость'}" th:href="@{/logout}">
+            <span th:text="${user.username}"></span>
+            <span> | Выйти</span>
+        </a>
     </nav>
-    <div class="row pt-3">
-        <div class="card-body" style="width: 100%">
-            <div class="form-group">
-                <form>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Постер</th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Год производства</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="film: ${films}">
-                            <td th:text="${film.id}"></td>
-                            <td>
-                                <a th:href="@{/films/{id}(id=${film.getId()})}">
-                                    <img th:src="@{|/photoAdd/${film.id}|}" class="img-fluid rounded-start"></a>
-                            </td>
-                            <td th:text="${film.name}"></td>
-                            <td th:text="${film.productionYear}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+    <div class="container pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Авторизация
+            </div>
+            <div class="card-body">
+                <div th:if="${fail}" class="alert alert-danger" role="alert">
+                    Не верный логин или пароль.
+                </div>
+                <form th:action="@{/login}" method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" th:placeholder="*{email}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" name="password" id="password" th:placeholder="*{password}">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Войти</button>
                 </form>
             </div>
         </div>

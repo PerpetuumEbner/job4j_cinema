@@ -6,26 +6,17 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-/**
- * Модель описывающая билет.
- *
- * @author yustas
- * @version 1.0
- */
-
 @AllArgsConstructor
 @Getter
 @Setter
-public class Ticket {
+public class CinemaHall {
     private int id;
 
-    private int sessionId;
+    private String name;
 
     private int row;
 
-    private int cell;
-
-    private int user_id;
+    private int sell;
 
     @Override
     public boolean equals(Object o) {
@@ -35,8 +26,8 @@ public class Ticket {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Ticket ticket = (Ticket) o;
-        return id == ticket.id;
+        CinemaHall that = (CinemaHall) o;
+        return id == that.id;
     }
 
     @Override

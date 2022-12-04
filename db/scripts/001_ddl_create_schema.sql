@@ -34,3 +34,11 @@ CREATE TABLE films
     productionYear VARCHAR(256),
     poster         bytea
 );
+
+CREATE TABLE seats
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL UNIQUE,
+    row  INT     NOT NULL,
+    cell INT     NOT NULL
+);

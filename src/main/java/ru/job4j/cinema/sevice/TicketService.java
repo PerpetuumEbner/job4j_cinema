@@ -7,6 +7,7 @@ import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.persistence.TicketDBStore;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Верхний слой хранилища TicketDBStore в котором находятся сеансы.
@@ -32,11 +33,13 @@ public class TicketService {
         store.update(ticket);
     }
 
-    public Ticket findById(int id) {
+    public Optional<Ticket> findById(int id) {
         return store.findById(id);
     }
 
     public List<Ticket> findAll() {
         return store.findAll();
     }
+
+
 }

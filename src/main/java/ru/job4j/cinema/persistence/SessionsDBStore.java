@@ -34,14 +34,15 @@ public class SessionsDBStore {
                      "INSERT INTO sessions(name) VALUES (?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
+            ps.setString(1, sessions.getName());
+            ps.execute();
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     ps.setString(1, sessions.getName());
-                    ps.execute();
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return sessions;
     }
@@ -64,7 +65,7 @@ public class SessionsDBStore {
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM sessions WHERE id = ?")
         ) {
             try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
+                if (it.next()) {
                     return new Sessions(
                             it.getInt("id"),
                             it.getString("name")

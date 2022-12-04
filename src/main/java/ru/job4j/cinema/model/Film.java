@@ -2,30 +2,30 @@ package ru.job4j.cinema.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
 /**
- * Модель описывающая билет.
+ * Модель описывающая фильм.
  *
  * @author yustas
  * @version 1.0
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Ticket {
+public class Film {
     private int id;
 
-    private int sessionId;
+    private String name;
 
-    private int row;
+    private String productionYear;
 
-    private int cell;
-
-    private int user_id;
+    private byte[] photo;
 
     @Override
     public boolean equals(Object o) {
@@ -35,8 +35,8 @@ public class Ticket {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Ticket ticket = (Ticket) o;
-        return id == ticket.id;
+        Film films = (Film) o;
+        return id == films.id;
     }
 
     @Override

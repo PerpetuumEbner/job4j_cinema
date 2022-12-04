@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * В классе происходит обработка билетов в базе данных.
@@ -28,7 +29,7 @@ public class TicketDBStore {
         this.pool = pool;
     }
 
-    public void add(Ticket ticket) {
+    public Ticket add(Ticket ticket) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO ticket(session_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
@@ -46,6 +47,7 @@ public class TicketDBStore {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
+        return ticket;
     }
 
     public void update(Ticket ticket) {
@@ -65,26 +67,26 @@ public class TicketDBStore {
         }
     }
 
-    public Ticket findById(int id) {
+    public Optional<Ticket> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "SELECT * FROM ticket WHERE id =?")
         ) {
             try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    return new Ticket(
+                if (it.next()) {
+                    return Optional.of(new Ticket(
                             it.getInt("id"),
                             it.getInt("session_id"),
                             it.getInt("row"),
                             it.getInt("cell"),
                             it.getInt("user_id")
-                    );
+                    ));
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<Ticket> findAll() {
