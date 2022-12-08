@@ -35,13 +35,13 @@ public class TicketDBStore {
                      "INSERT INTO ticket(session_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    ps.setInt(1, ticket.getId());
-                    ps.setInt(2, ticket.getSessionId());
-                    ps.setInt(3, ticket.getRow());
-                    ps.setInt(4, ticket.getCell());
-                    ps.setInt(5, ticket.getUser_id());
+            ps.setInt(1, ticket.getSessionId());
+            ps.setInt(2, ticket.getRow());
+            ps.setInt(3, ticket.getCell());
+            ps.setInt(4, ticket.getUser_id());
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                while (id.next()) {
+                    ticket.setId(id.getInt(1));
                 }
             }
         } catch (Exception e) {
@@ -56,11 +56,10 @@ public class TicketDBStore {
                      "UPDATE ticket SET session_id = ?, row = ?, cell = ?, user_id = ? WHERE id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, ticket.getId());
-            ps.setInt(2, ticket.getSessionId());
-            ps.setInt(3, ticket.getRow());
-            ps.setInt(4, ticket.getCell());
-            ps.setInt(5, ticket.getUser_id());
+            ps.setInt(1, ticket.getSessionId());
+            ps.setInt(2, ticket.getRow());
+            ps.setInt(3, ticket.getCell());
+            ps.setInt(4, ticket.getUser_id());
             ps.executeUpdate();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -72,6 +71,7 @@ public class TicketDBStore {
              PreparedStatement ps = cn.prepareStatement(
                      "SELECT * FROM ticket WHERE id =?")
         ) {
+            ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     return Optional.of(new Ticket(

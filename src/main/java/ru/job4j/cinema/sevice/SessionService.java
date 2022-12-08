@@ -28,10 +28,6 @@ public class SessionService {
         return store.add(sessions);
     }
 
-    public void update(Sessions sessions) {
-        store.update(sessions);
-    }
-
     public Sessions findById(int id) {
         return store.findById(id);
     }

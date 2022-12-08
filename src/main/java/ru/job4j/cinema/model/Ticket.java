@@ -2,6 +2,7 @@ package ru.job4j.cinema.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.util.Objects;
  * @version 1.0
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -29,12 +31,8 @@ public class Ticket {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return id == ticket.id;
     }

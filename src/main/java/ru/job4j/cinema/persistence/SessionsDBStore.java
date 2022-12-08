@@ -36,36 +36,24 @@ public class SessionsDBStore {
         ) {
             ps.setString(1, sessions.getName());
             ps.execute();
-            try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    ps.setString(1, sessions.getName());
+            try (ResultSet id = ps.executeQuery()) {
+                while (id.next()) {
+                    sessions.setId(id.getInt(1));
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
+            e.printStackTrace();
         }
         return sessions;
-    }
-
-    public void update(Sessions sessions) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE sessions SET name = ? WHERE id = ?",
-                     PreparedStatement.RETURN_GENERATED_KEYS)
-        ) {
-            ps.setString(1, sessions.getName());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
     }
 
     public Sessions findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM sessions WHERE id = ?")
         ) {
+            ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
-                if (it.next()) {
+                while (it.next()) {
                     return new Sessions(
                             it.getInt("id"),
                             it.getString("name")

@@ -2,6 +2,7 @@ CREATE TABLE users
 (
     id       SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
     email    VARCHAR NOT NULL UNIQUE,
     phone    VARCHAR NOT NULL UNIQUE
 );
@@ -27,7 +28,7 @@ CREATE TABLE ticket
 ALTER TABLE ticket
     ADD CONSTRAINT session_id_row_cell UNIQUE (session_id, row, cell);
 
-CREATE TABLE films
+CREATE TABLE film
 (
     id             SERIAL PRIMARY KEY,
     name           VARCHAR(256),

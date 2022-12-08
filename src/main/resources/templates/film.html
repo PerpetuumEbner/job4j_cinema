@@ -17,7 +17,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
     <title>Cinema</title>
 </head>
 <body>
@@ -31,52 +30,33 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
+                <a class="nav-item nav-link" th:href="@{/formAddFilm}">Добавить фильм</a>
             </div>
         </div>
     </nav>
-    <div class="card-body" style="width: 100%">
-        <div class="form-group">
-            <table class="table hover">
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Постер</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Год производства</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td></td>
-                    <td>
-                        <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
-                    </td>
-                    <td th:text="${film.name}"></td>
-                    <td th:text="${film.productionYear}"></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card" style="width: 100%">
-            <div class="card-body">
-                <form th:action="@{/choiceTicket}" method="POST">
-                    <input type="hidden" name="id" value="0"/>
-                    <div class="form-group">
-                        <label for="ticket.row">Ряд</label>
-                        <select class="form-control" id="ticket.row" name="row">
-                            <option th:each="row : ${rows}" th:text="${row}"></option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ticket.cell">Место</label>
-                        <select class="form-control" id="ticket.cell" name="cell">
-                            <option th:each="cell : ${cells}" th:text="${cell}"></option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-outline-primary">Выбор</button>
-                </form>
+    <div class="container pt-3">
+        <div class="card-body" style="width: 100%">
+            <div class="form-group">
+                <table class="table hover">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Постер</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Год производства</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
+                        </td>
+                        <td th:text="${film.name}"></td>
+                        <td th:text="${film.productionYear}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

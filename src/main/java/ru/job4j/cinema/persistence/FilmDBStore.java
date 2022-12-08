@@ -64,7 +64,7 @@ public class FilmDBStore {
                     return new Film(
                             it.getInt("id"),
                             it.getString("name"),
-                            it.getString("productionYear"),
+                            it.getInt("productionYear"),
                             it.getBytes("poster"));
                 }
             }
@@ -89,7 +89,7 @@ public class FilmDBStore {
                     posts.add(new Film(
                             it.getInt("id"),
                             it.getString("name"),
-                            it.getString("productionYear"),
+                            it.getInt("productionYear"),
                             it.getBytes("poster")));
                 }
             }

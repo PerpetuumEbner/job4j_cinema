@@ -23,9 +23,9 @@ public class Film {
 
     private String name;
 
-    private String productionYear;
+    private int productionYear;
 
-    private byte[] photo;
+    private byte[] poster;
 
     @Override
     public boolean equals(Object o) {
@@ -35,8 +35,8 @@ public class Film {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Film films = (Film) o;
-        return id == films.id;
+        Film film = (Film) o;
+        return id == film.id;
     }
 
     @Override

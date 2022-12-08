@@ -17,7 +17,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
     <title>Cinema</title>
 </head>
 <body>
@@ -30,7 +29,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
+                <a class="nav-item nav-link" th:href="@{/film}">Сегодня в кино</a>
             </div>
         </div>
         <a class="nav-item nav-link" th:href="@{/formAddUser}">Регистрация</a>
@@ -56,8 +55,7 @@
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
                         <label for="username">Имя</label>
-                        <input type="text" class="form-control" name="username" id="username"
-                               th:placeholder="*{username}">
+                        <input type="text" class="form-control" name="username" id="username" th:placeholder="*{username}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -69,8 +67,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" class="form-control" name="password" id="password"
-                               th:placeholder="*{password}">
+                        <input type="password" class="form-control" name="password" id="password" th:placeholder="*{password}">
                     </div>
                     <button type="submit" class="btn btn-outline-primary">Сохранить</button>
                 </form>

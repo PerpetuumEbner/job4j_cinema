@@ -1,6 +1,7 @@
 package ru.job4j.cinema.controller;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class FilmController {
     private final FilmService filmService;
 
+    @Autowired
     public FilmController(FilmService filmService) {
         this.filmService = filmService;
     }
@@ -30,27 +32,33 @@ public class FilmController {
         return "films";
     }
 
+    @GetMapping("/films/{filmId}")
+    public String formBuyTicket(Model model, @PathVariable("filmId") int id) {
+        model.addAttribute("film", filmService.findById(id));
+        return "/film";
+    }
+
     @GetMapping("/formAddFilm")
-    public String formAddFilm(Model model) {
+    public String addFilm(Model model) {
         model.addAttribute("film", new Film());
         return "addFilm";
     }
 
-//    @PostMapping("/createFilm")
-//    public String createFilm(@ModelAttribute Film film,
-//                             @RequestParam("file") MultipartFile file) throws IOException {
-//        film.setPhoto(file.getBytes());
-//        filmService.add(film);
-//        return "redirect:/films";
-//    }
-//
-//    @GetMapping("/photoFilm/{filmId}")
-//    public ResponseEntity<Resource> download(@PathVariable("filmId") Integer filmId) {
-//        Film film = filmService.findById(filmId);
-//        return ResponseEntity.ok()
-//                .headers(new HttpHeaders())
-//                .contentLength(film.getPhoto().length)
-//                .contentType(MediaType.parseMediaType("application/octet-stream"))
-//                .body(new ByteArrayResource(film.getPhoto()));
-//    }
+    @PostMapping("/createFilm")
+    public String createFilm(@ModelAttribute Film film,
+                             @RequestParam("file") MultipartFile file) throws IOException {
+        film.setPoster(file.getBytes());
+        filmService.add(film);
+        return "redirect:/films";
+    }
+
+    @GetMapping("/posterFilm/{adId}")
+    public ResponseEntity<Resource> download(@PathVariable("adId") int id) {
+        Film film = filmService.findById(id);
+        return ResponseEntity.ok()
+                .headers(new HttpHeaders())
+                .contentLength(film.getPoster().length)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new ByteArrayResource(film.getPoster()));
+    }
 }
