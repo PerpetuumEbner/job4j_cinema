@@ -32,10 +32,12 @@ public class FilmDBStore {
     public Film add(Film film) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO films(name) VALUES (?)",
+                     "INSERT INTO films(name, productionyear, poster) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, film.getName());
+            ps.setInt(2, film.getProductionYear());
+            ps.setBytes(3, film.getPoster());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {

@@ -50,7 +50,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <img th:width="150" th:high="200" th:src="@{|${film.id}|}">
+                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.id}|}">
                         </td>
                         <td th:text="${film.name}"></td>
                         <td th:text="${film.productionYear}"></td>
