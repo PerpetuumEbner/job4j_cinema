@@ -33,7 +33,7 @@ public class CinemaHallDBStore {
                             it.getInt("id"),
                             it.getString("name"),
                             it.getInt("row"),
-                            it.getInt("sell"));
+                            it.getInt("cell"));
                 }
             }
         } catch (Exception e) {
@@ -43,22 +43,22 @@ public class CinemaHallDBStore {
     }
 
     public List<CinemaHall> findAll() {
-        List<CinemaHall> posts = new ArrayList<>();
+        List<CinemaHall> halls = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM seats")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new CinemaHall(
+                    halls.add(new CinemaHall(
                             it.getInt("id"),
                             it.getString("name"),
                             it.getInt("row"),
-                            it.getInt("sell")));
+                            it.getInt("cell")));
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return posts;
+        return halls;
     }
 }

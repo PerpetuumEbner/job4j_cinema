@@ -61,13 +61,15 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="hall.id">Выберите зал </label>
+                <label for="row.id">Выберите ряд</label>
+                <select class="form-control" id="row.id" name="row.id">
+                    <option th:each="row : ${rows}" th:value="${row.id}" th:text="${row.name}"></option>
+                </select>
+                <label for="cell.id">Выберите место</label>
                 <select class="form-control" id="hall.id" name="hall.id">
-                    <option th:each="hall : ${halls}" th:value="${hall.id}" th:text="${hall.name}"></option>
+                    <option th:each="cell : ${cells}" th:value="${cell.id}" th:text="${cell.name}"></option>
                 </select>
             </div>
-            <a class="btn btn-outline-primary" th:href="@{|/films/${film.id}|}"
-               role="button">Далее</a>
         </div>
     </div>
 </div>

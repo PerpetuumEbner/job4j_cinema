@@ -16,19 +16,19 @@ CREATE TABLE sessions
     name text
 );
 
-CREATE TABLE ticket
+CREATE TABLE tickets
 (
     id         SERIAL PRIMARY KEY,
-    session_id INT NOT NULL REFERENCES sessions (id),
+    film_id INT NOT NULL REFERENCES sessions (id),
     row        INT NOT NULL,
     cell       INT NOT NULL,
     user_id    INT NOT NULL REFERENCES users (id)
 );
 
-ALTER TABLE ticket
-    ADD CONSTRAINT session_id_row_cell UNIQUE (session_id, row, cell);
+ALTER TABLE tickets
+    ADD CONSTRAINT session_id_row_cell UNIQUE (film_id, row, cell);
 
-CREATE TABLE film
+CREATE TABLE films
 (
     id             SERIAL PRIMARY KEY,
     name           VARCHAR(256),
@@ -39,6 +39,7 @@ CREATE TABLE film
 CREATE TABLE seats
 (
     id   SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
     row  INT     NOT NULL,
     cell INT     NOT NULL
 );

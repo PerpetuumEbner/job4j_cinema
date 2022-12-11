@@ -16,7 +16,7 @@ public class CinemaHall {
 
     private int row;
 
-    private int sell;
+    private int cell;
 
     @Override
     public boolean equals(Object o) {

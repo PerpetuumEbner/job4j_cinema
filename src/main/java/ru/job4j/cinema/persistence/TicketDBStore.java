@@ -32,7 +32,7 @@ public class TicketDBStore {
     public Ticket add(Ticket ticket) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO ticket(session_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
+                     "INSERT INTO tickets(film_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setInt(1, ticket.getSessionId());
@@ -53,7 +53,7 @@ public class TicketDBStore {
     public void update(Ticket ticket) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE ticket SET session_id = ?, row = ?, cell = ?, user_id = ? WHERE id = ?",
+                     "UPDATE tickets SET film_id = ?, row = ?, cell = ?, user_id = ? WHERE id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setInt(1, ticket.getSessionId());
@@ -69,14 +69,14 @@ public class TicketDBStore {
     public Optional<Ticket> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "SELECT * FROM ticket WHERE id =?")
+                     "SELECT * FROM tickets WHERE id =?")
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     return Optional.of(new Ticket(
                             it.getInt("id"),
-                            it.getInt("session_id"),
+                            it.getInt("film_id"),
                             it.getInt("row"),
                             it.getInt("cell"),
                             it.getInt("user_id")
@@ -92,15 +92,14 @@ public class TicketDBStore {
     public List<Ticket> findAll() {
         List<Ticket> tickets = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "SELECT * FROM ticket?")
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM tickets")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     tickets.add(
                             new Ticket(
                                     it.getInt("id"),
-                                    it.getInt("session_id"),
+                                    it.getInt("film_id"),
                                     it.getInt("row"),
                                     it.getInt("cell"),
                                     it.getInt("user_id")

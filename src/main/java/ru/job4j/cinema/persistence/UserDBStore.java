@@ -98,8 +98,7 @@ public class UserDBStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    users.add(
-                            new User(
+                    users.add(new User(
                                     it.getInt("id"),
                                     it.getString("username"),
                                     it.getString("password"),

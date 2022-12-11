@@ -30,7 +30,9 @@ public class FilmController {
     private final CinemaHallService cinemaHallService;
 
     @Autowired
-    public FilmController(FilmService filmService, TicketService ticketService, CinemaHallService cinemaHallService) {
+    public FilmController(FilmService filmService,
+                          TicketService ticketService,
+                          CinemaHallService cinemaHallService) {
         this.filmService = filmService;
         this.ticketService = ticketService;
         this.cinemaHallService = cinemaHallService;
@@ -43,11 +45,26 @@ public class FilmController {
     }
 
     @GetMapping("/films/{filmId}")
-    public String formBuyTicket(Model model, HttpServletRequest req, @PathVariable("filmId") int id) {
+    public String formSelectionHall(Model model,
+                                    HttpServletRequest req,
+                                    @PathVariable("filmId") int filmId) {
         HttpSession session = req.getSession();
-        session.setAttribute("film", filmService.findById(id));
-        model.addAttribute("film", filmService.findById(id));
+        session.setAttribute("film", filmService.findById(filmId));
+        model.addAttribute("film", filmService.findById(filmId));
+        model.addAttribute("halls", cinemaHallService.findAll());
         return "/film";
+    }
+
+    @GetMapping("/films/{filmId}/{hallId}")
+    public String formSelectionSeat(Model model,
+                                    HttpServletRequest req,
+                                    @PathVariable("filmId") int filmId,
+                                    @PathVariable("hallId") int hallId) {
+        HttpSession session = req.getSession();
+        session.setAttribute("hall", cinemaHallService.findById(hallId));
+        model.addAttribute("film", filmService.findById(filmId));
+        model.addAttribute("hall", cinemaHallService.findById(hallId));
+        return "/hall";
     }
 
     @GetMapping("/formAddFilm")
