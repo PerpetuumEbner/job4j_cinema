@@ -51,20 +51,19 @@ public class FilmController {
         HttpSession session = req.getSession();
         session.setAttribute("film", filmService.findById(filmId));
         model.addAttribute("film", filmService.findById(filmId));
-        model.addAttribute("halls", cinemaHallService.findAll());
         return "/film";
     }
 
-    @GetMapping("/films/{filmId}/{hallId}")
+    @GetMapping("/place/{filmId}")
     public String formSelectionSeat(Model model,
                                     HttpServletRequest req,
-                                    @PathVariable("filmId") int filmId,
-                                    @PathVariable("hallId") int hallId) {
+                                    @PathVariable("filmId") int filmId) {
         HttpSession session = req.getSession();
-        session.setAttribute("hall", cinemaHallService.findById(hallId));
         model.addAttribute("film", filmService.findById(filmId));
-        model.addAttribute("hall", cinemaHallService.findById(hallId));
-        return "/hall";
+        model.addAttribute("halls", cinemaHallService.findAll());
+        model.addAttribute("rows", cinemaHallService.findAllRows(1));
+        model.addAttribute("cells", cinemaHallService.findAllCell(1));
+        return "place";
     }
 
     @GetMapping("/formAddFilm")

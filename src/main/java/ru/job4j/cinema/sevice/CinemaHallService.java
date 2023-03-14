@@ -23,4 +23,12 @@ public class CinemaHallService {
     public List<CinemaHall> findAll() {
         return cinemaHallDBStore.findAll();
     }
+
+    public List<Integer> findAllRows(int id) {
+        return cinemaHallDBStore.findAllRows(id);
+    }
+
+    public List<Integer> findAllCell(int id) {
+        return cinemaHallDBStore.findAllCell(id);
+    }
 }

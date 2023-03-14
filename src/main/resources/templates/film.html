@@ -60,14 +60,8 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="form-group">
-                <label for="hall.id">Выберите зал </label>
-                <select class="form-control" id="hall.id" name="hall.id">
-                    <option th:each="hall : ${halls}" th:value="${hall.id}" th:text="${hall.name}"></option>
-                </select>
-            </div>
-            <a class="btn btn-outline-primary" th:href="@{|/films/${film.id}|}"
-               role="button">Далее</a>
+            <a class="btn btn-outline-primary" th:href="@{|/place/${film.id}|}"
+               role="button">Выбрать место в зале</a>
         </div>
     </div>
 </div>

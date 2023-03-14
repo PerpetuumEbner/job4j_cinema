@@ -61,4 +61,22 @@ public class CinemaHallDBStore {
         }
         return halls;
     }
+
+    public List<Integer> findAllRows(int id) {
+        List<Integer> rows = new ArrayList<>();
+        int count = findById(id).getRow();
+        for (int index = 1; index <= count; index++) {
+            rows.add(index);
+        }
+        return rows;
+    }
+
+    public List<Integer> findAllCell(int id) {
+        List<Integer> cells = new ArrayList<>();
+        int count = findById(id).getCell();
+        for (int index = 1; index <= count; index++) {
+            cells.add(index);
+        }
+        return cells;
+    }
 }
