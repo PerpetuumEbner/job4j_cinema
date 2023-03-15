@@ -23,18 +23,16 @@ public class UserController {
     }
 
     @GetMapping("/formAddUser")
-    public String addUser(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
+    public String addUser(Model model,
+                          @RequestParam(name = "fail", required = false) Boolean fail) {
         model.addAttribute("fail", fail != null);
-        model.addAttribute("user",
-                new User(0, "Введите имя...",
-                        "Введите пароль...",
-                        "Введите email...",
-                        "Введите телефон..."));
+        model.addAttribute("user", new User());
         return "addUser";
     }
 
     @PostMapping("/registration")
-    public String registration(Model model, @ModelAttribute User user) {
+    public String registration(Model model,
+                               @ModelAttribute User user) {
         Optional<User> regUser = service.add(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
@@ -56,11 +54,7 @@ public class UserController {
         }
         model.addAttribute("users", user);
         model.addAttribute("fail", fail != null);
-        model.addAttribute("user",
-                new User(0, "Введите имя...",
-                        "Введите пароль...",
-                        "Введите email...",
-                        "Введите телефон..."));
+        model.addAttribute("user", new User());
         return "login";
     }
 

@@ -35,7 +35,7 @@ public class TicketDBStore {
                      "INSERT INTO tickets(film_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, ticket.getSessionId());
+            ps.setInt(1, ticket.getFilmId());
             ps.setInt(2, ticket.getRow());
             ps.setInt(3, ticket.getCell());
             ps.setInt(4, ticket.getUser_id());
@@ -56,7 +56,7 @@ public class TicketDBStore {
                      "UPDATE tickets SET film_id = ?, row = ?, cell = ?, user_id = ? WHERE id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, ticket.getSessionId());
+            ps.setInt(1, ticket.getFilmId());
             ps.setInt(2, ticket.getRow());
             ps.setInt(3, ticket.getCell());
             ps.setInt(4, ticket.getUser_id());

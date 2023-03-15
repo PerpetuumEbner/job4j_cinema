@@ -24,7 +24,7 @@ public class CinemaHallDBStore {
 
     public CinemaHall findById(int id) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM seats WHERE id = ?")
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM halls WHERE id = ?")
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
@@ -45,7 +45,7 @@ public class CinemaHallDBStore {
     public List<CinemaHall> findAll() {
         List<CinemaHall> halls = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM seats")
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM halls")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {

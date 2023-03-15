@@ -41,7 +41,6 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col"></th>
                             <th scope="col">Постер</th>
                             <th scope="col">Название</th>
                             <th scope="col">Год производства</th>
@@ -49,7 +48,6 @@
                         </thead>
                         <tbody>
                         <tr th:each="film: ${films}">
-                            <td th:text="${film.id}"></td>
                             <td>
                                 <a th:href="@{|/films/${film.id}|}">
                                     <img th:width="150" th:high="150" th:src="@{|/posterFilm/${film.id}|}">

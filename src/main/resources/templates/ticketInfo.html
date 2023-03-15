@@ -35,49 +35,10 @@
         </div>
     </nav>
     <div class="container pt-3">
-        <div class="card-body" style="width: 100%">
-            <div class="form-group">
-                <table class="table hover">
-                    <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Постер</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Год производства</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.id}|}">
-                        </td>
-                        <td th:text="${film.name}"></td>
-                        <td th:text="${film.productionYear}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="card-body">
-            <form th:action="@{/ticketInfo}" method="GET">
-                <div class="form-group">
-                    <label for="row">Выберите ряд</label>
-                    <select class="form-control" id="row" name="row">
-                        <option th:each="row : ${rows}" th:value="${row}"
-                                th:text="${row}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    </select>
-                    <label for="cell">Выберите место</label>
-                    <select class="form-control" id="cell" name="cell">
-                        <option th:each="cell : ${cells}" th:value="${cell}"
-                                th:text="${cell}"></option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-outline-primary">Подтвердить</button>
-            </form>
+        <div class="form-group">
+            Фильм: <p th:text="${film.name}"></p>
+            Ряд: <p th:text="${ticket.getRow()}"></p>
+            Место: <p th:text="${ticket.getCell()}"></p>
         </div>
     </div>
 </div>

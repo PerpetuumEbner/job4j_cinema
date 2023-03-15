@@ -21,7 +21,7 @@ import java.util.Objects;
 public class Ticket {
     private int id;
 
-    private int sessionId;
+    private int filmId;
 
     private int row;
 
