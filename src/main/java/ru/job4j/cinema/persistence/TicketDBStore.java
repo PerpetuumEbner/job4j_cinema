@@ -29,7 +29,7 @@ public class TicketDBStore {
         this.pool = pool;
     }
 
-    public Ticket add(Ticket ticket) {
+    public Optional<Ticket> add(Ticket ticket) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO tickets(film_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
@@ -47,23 +47,7 @@ public class TicketDBStore {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return ticket;
-    }
-
-    public void update(Ticket ticket) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE tickets SET film_id = ?, row = ?, cell = ?, user_id = ? WHERE id = ?",
-                     PreparedStatement.RETURN_GENERATED_KEYS)
-        ) {
-            ps.setInt(1, ticket.getFilmId());
-            ps.setInt(2, ticket.getRow());
-            ps.setInt(3, ticket.getCell());
-            ps.setInt(4, ticket.getUser_id());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
+        return Optional.of(ticket);
     }
 
     public Optional<Ticket> findById(int id) {

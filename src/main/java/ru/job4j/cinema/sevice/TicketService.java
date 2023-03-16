@@ -25,12 +25,8 @@ public class TicketService {
         this.store = store;
     }
 
-    public void add(Ticket ticket) {
-        store.add(ticket);
-    }
-
-    public void update(Ticket ticket) {
-        store.update(ticket);
+    public Optional<Ticket> add(Ticket ticket) {
+        return store.add(ticket);
     }
 
     public Optional<Ticket> findById(int id) {
@@ -40,6 +36,4 @@ public class TicketService {
     public List<Ticket> findAll() {
         return store.findAll();
     }
-
-
 }

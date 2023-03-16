@@ -10,19 +10,13 @@ CREATE TABLE users
 ALTER TABLE users
     ADD CONSTRAINT username_email_phone_unique UNIQUE (username, email, phone);
 
-CREATE TABLE sessions
-(
-    id   SERIAL PRIMARY KEY,
-    name text
-);
-
 CREATE TABLE tickets
 (
-    id         SERIAL PRIMARY KEY,
-    film_id INT NOT NULL REFERENCES sessions (id),
-    row        INT NOT NULL,
-    cell       INT NOT NULL,
-    user_id    INT NOT NULL REFERENCES users (id)
+    id      SERIAL PRIMARY KEY,
+    film_id INT NOT NULL REFERENCES films (id),
+    row     INT NOT NULL,
+    cell    INT NOT NULL,
+    user_id INT NOT NULL REFERENCES users (id)
 );
 
 ALTER TABLE tickets
@@ -36,7 +30,7 @@ CREATE TABLE films
     poster         bytea
 );
 
-CREATE TABLE seats
+CREATE TABLE halls
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,

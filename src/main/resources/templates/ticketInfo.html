@@ -18,6 +18,13 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <title>Cinema</title>
+
+    <style>
+        .cols {
+            white-space: nowrap;
+        }
+    </style>
+
 </head>
 <body>
 <div class="container">
@@ -35,10 +42,40 @@
         </div>
     </nav>
     <div class="container pt-3">
-        <div class="form-group">
-            Фильм: <p th:text="${film.name}"></p>
-            Ряд: <p th:text="${ticket.getRow()}"></p>
-            Место: <p th:text="${ticket.getCell()}"></p>
+        <div class="mx-auto pb-3" style="width: 800px;">
+            <div class="card">
+                <form th:action="@{/buyTicket}" method="POST">
+                    <div class="card-header">
+                        Информация о билете
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Пользователь: <span th:text="${film.id}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            Фильм: <span th:text="${film.name}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            Ряд: <span th:text="${ticket.getRow()}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            Место: <span th:text="${ticket.getCell()}"></span>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-outline-success">Купить</button>
+                        <a class="btn btn-outline-primary" th:href="@{|/place/${film.id}|}"
+                           role="button">Назад</a>
+                        <a class="btn btn-outline-danger" th:href="@{|/films|}"
+                           role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div th:if="${fail}" class="alert alert-danger" role="alert">
+                    Место уже продано!
+                </div>
+            </div>
         </div>
     </div>
 </div>
