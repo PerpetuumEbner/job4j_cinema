@@ -19,6 +19,8 @@ import ru.job4j.cinema.sevice.FilmService;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+
 @ThreadSafe
 @Controller
 public class FilmController {
@@ -34,14 +36,17 @@ public class FilmController {
     }
 
     @GetMapping("/films")
-    public String films(Model model) {
+    public String films(Model model, HttpSession session) {
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("films", filmService.findAll());
         return "films";
     }
 
     @GetMapping("/films/{filmId}")
     public String formSelectionHall(Model model,
-                                    @PathVariable("filmId") int filmId) {
+                                    @PathVariable("filmId") int filmId,
+                                    HttpSession session) {
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", filmService.findById(filmId));
         return "/film";
     }
@@ -49,10 +54,11 @@ public class FilmController {
     @GetMapping("/place/{filmId}")
     public String formSelectionSeat(Model model,
                                     @PathVariable("filmId") int filmId,
-                                    HttpSession httpSession) {
+                                    HttpSession session) {
         Ticket ticketSession = new Ticket();
         ticketSession.setFilmId(filmId);
-        httpSession.setAttribute("ticket", ticketSession);
+        session.setAttribute("ticket", ticketSession);
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", filmService.findById(filmId));
         model.addAttribute("rows", cinemaHallService.findAllRows(1));
         model.addAttribute("cells", cinemaHallService.findAllCell(1));
@@ -60,7 +66,8 @@ public class FilmController {
     }
 
     @GetMapping("/formAddFilm")
-    public String addFilm(Model model) {
+    public String addFilm(Model model, HttpSession session) {
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", new Film());
         return "addFilm";
     }

@@ -21,7 +21,7 @@ import java.util.Objects;
 public class User {
     private int id;
 
-    private String username;
+    private String name;
 
     private String password;
 

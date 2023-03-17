@@ -33,6 +33,15 @@
                 <a class="nav-item nav-link" th:href="@{/formAddFilm}">Добавить фильм</a>
             </div>
         </div>
+        <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}">Регистрация</a>
+        <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+            <span th:text="${user.name}"></span>
+            <span> | Войти</span>
+        </a>
+        <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+            <span th:text="${user.name}"></span>
+            <span> | Выйти</span>
+        </a>
     </nav>
     <div class="container pt-3">
         <div class="card-body" style="width: 100%">

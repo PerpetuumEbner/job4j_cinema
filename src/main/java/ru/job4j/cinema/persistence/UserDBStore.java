@@ -33,10 +33,10 @@ public class UserDBStore {
         Optional<User> optionalUser = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO users(username, password, email, phone) VALUES (?, ?, ?, ?)",
+                     "INSERT INTO users(name, password, email, phone) VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setString(1, user.getUsername());
+            ps.setString(1, user.getName());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPhone());
@@ -56,10 +56,10 @@ public class UserDBStore {
     public void update(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE users SET username = ?, password = ?, email = ?, phone = ? WHERE id = ?",
+                     "UPDATE users SET name = ?, password = ?, email = ?, phone = ? WHERE id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setString(1, user.getUsername());
+            ps.setString(1, user.getName());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPhone());
@@ -78,7 +78,7 @@ public class UserDBStore {
                 if (it.next()) {
                     return Optional.of(new User(
                             it.getInt("id"),
-                            it.getString("username"),
+                            it.getString("name"),
                             it.getString("password"),
                             it.getString("email"),
                             it.getString("phone")
@@ -100,7 +100,7 @@ public class UserDBStore {
                 while (it.next()) {
                     users.add(new User(
                                     it.getInt("id"),
-                                    it.getString("username"),
+                                    it.getString("name"),
                                     it.getString("password"),
                                     it.getString("email"),
                                     it.getString("phone")
@@ -125,7 +125,7 @@ public class UserDBStore {
                 if (it.next()) {
                     return Optional.of(new User(
                             it.getInt("id"),
-                            it.getString("username"),
+                            it.getString("name"),
                             it.getString("password"),
                             it.getString("email"),
                             it.getString("password")));

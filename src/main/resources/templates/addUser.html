@@ -29,16 +29,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" th:href="@{/film}">Сегодня в кино</a>
+                <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
+                <a class="nav-item nav-link" th:href="@{/formAddFilm}">Добавить фильм</a>
             </div>
         </div>
-        <a class="nav-item nav-link" th:href="@{/formAddUser}">Регистрация</a>
-        <a class="nav-item nav-link" th:if="${user.username == 'Гость'}" th:href="@{/loginPage}">
-            <span th:text="${user.username}"></span>
+        <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}">Регистрация</a>
+        <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+            <span th:text="${user.name}"></span>
             <span> | Войти</span>
         </a>
-        <a class="nav-item nav-link" th:if="${user.username != 'Гость'}" th:href="@{/logout}">
-            <span th:text="${user.username}"></span>
+        <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+            <span th:text="${user.name}"></span>
             <span> | Выйти</span>
         </a>
     </nav>
@@ -52,25 +53,27 @@
                     <div th:if="${fail}" class="alert alert-danger" role="alert">
                         Пользователь с введенным email уже зарегистрирован!
                     </div>
-                    <form th:action="@{/registration}" method="POST" th:object="${user}">
+                    <form th:action="@{/registration}" class="was-validated" method="POST" th:object="${user}">
                         <input type="hidden" name="id" value="0"/>
                         <div class="form-group">
-                            <label for="username">Имя</label>
-                            <input type="text" class="form-control" name="username" id="username"
-                                   th:placeholder="*{username}">
+                            <label for="name">Имя</label>
+                            <input type="text" class="form-control" name="name" id="name" required>
+                            <div class="invalid-feedback">Введите имя</div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" th:placeholder="*{email}">
+                            <input type="email" class="form-control" name="email" id="email" required>
+                            <div class="invalid-feedback">Введите почту</div>
                         </div>
                         <div class="form-group">
                             <label for="phone">Телефон</label>
-                            <input type="text" class="form-control" name="phone" id="phone" th:placeholder="*{phone}">
+                            <input type="phone" class="form-control" name="phone" id="phone" required>
+                            <div class="invalid-feedback">Введите номер телефона: +7</div>
                         </div>
                         <div class="form-group">
                             <label for="password">Пароль</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                   th:placeholder="*{password}">
+                            <input type="password" class="form-control" name="password" id="password" required>
+                            <div class="invalid-feedback">Введите пароль</div>
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Сохранить</button>
                     </form>

@@ -12,14 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+
 @ThreadSafe
 @Controller
 public class UserController {
-    private final UserService service;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserService service) {
-        this.service = service;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/formAddUser")
@@ -33,9 +35,9 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(Model model,
                                @ModelAttribute User user) {
-        Optional<User> regUser = service.add(user);
+        Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с такой почтой уже существует");
+            model.addAttribute("message", "Пользователь с таким именем уже существует!");
             return "redirect:/formAddUser?fail=true";
         }
         return "redirect:/films";
@@ -47,20 +49,16 @@ public class UserController {
             @RequestParam(name = "fail", required = false) Boolean fail,
             HttpSession session
     ) {
-        User user = (User) session.getAttribute("username");
-        if (user == null) {
-            user = new User();
-            user.setUsername("Гость");
-        }
-        model.addAttribute("users", user);
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("fail", fail != null);
         model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute User user, HttpServletRequest req) {
-        Optional<User> userDb = service.findUserByEmailAndPwd(
+    public String login(@ModelAttribute User user,
+                        HttpServletRequest req) {
+        Optional<User> userDb = userService.findUserByEmailAndPwd(
                 user.getEmail(), user.getPassword()
         );
         if (userDb.isEmpty()) {

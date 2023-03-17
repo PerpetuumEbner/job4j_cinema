@@ -39,6 +39,7 @@ public class TicketDBStore {
             ps.setInt(2, ticket.getRow());
             ps.setInt(3, ticket.getCell());
             ps.setInt(4, ticket.getUser_id());
+            ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 while (id.next()) {
                     ticket.setId(id.getInt(1));

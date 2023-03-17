@@ -1,14 +1,14 @@
 CREATE TABLE users
 (
     id       SERIAL PRIMARY KEY,
-    username VARCHAR NOT NULL,
+    name     VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     email    VARCHAR NOT NULL UNIQUE,
     phone    VARCHAR NOT NULL UNIQUE
 );
 
 ALTER TABLE users
-    ADD CONSTRAINT username_email_phone_unique UNIQUE (username, email, phone);
+    ADD CONSTRAINT name_email_phone_unique UNIQUE (name, email, phone);
 
 CREATE TABLE tickets
 (

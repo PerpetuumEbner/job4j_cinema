@@ -15,6 +15,8 @@ import ru.job4j.cinema.sevice.TicketService;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+
 @ThreadSafe
 @Controller
 public class TicketController {
@@ -32,19 +34,19 @@ public class TicketController {
     public String ticketInfo(Model model,
                              @ModelAttribute("ticket") Ticket ticket,
                              @RequestParam(name = "fail", required = false) Boolean fail,
-                             HttpSession httpSession) {
-        Ticket ticketSession = (Ticket) httpSession.getAttribute("ticket");
+                             HttpSession session) {
+        Ticket ticketSession = (Ticket) session.getAttribute("ticket");
         ticketSession.setRow(ticket.getRow());
         ticketSession.setCell(ticket.getCell());
         model.addAttribute("fail", fail != null);
+        model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", filmService.findById(ticketSession.getFilmId()));
         return "ticketInfo";
     }
 
     @PostMapping("/buyTicket")
-    public String buyTicket(Model model,
-                            HttpSession httpSession) {
-        Ticket sessionTicket = (Ticket) httpSession.getAttribute("ticket");
+    public String buyTicket(Model model, HttpSession session) {
+        Ticket sessionTicket = (Ticket) session.getAttribute("ticket");
         Optional<Ticket> buyTicket = ticketService.add(sessionTicket);
         if (buyTicket.isPresent()) {
             model.addAttribute("message", "Место уже куплено!");
