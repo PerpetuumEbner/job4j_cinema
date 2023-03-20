@@ -29,10 +29,6 @@ public class UserService {
         return store.add(user);
     }
 
-    public void update(User user) {
-        store.update(user);
-    }
-
     public Optional<User> findById(int id) {
         return store.findById(id);
     }

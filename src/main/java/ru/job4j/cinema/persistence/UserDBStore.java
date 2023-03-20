@@ -53,22 +53,6 @@ public class UserDBStore {
         return optionalUser;
     }
 
-    public void update(User user) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE users SET name = ?, password = ?, email = ?, phone = ? WHERE id = ?",
-                     PreparedStatement.RETURN_GENERATED_KEYS)
-        ) {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPhone());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
-
     public Optional<User> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE id = ?")
@@ -128,7 +112,7 @@ public class UserDBStore {
                             it.getString("name"),
                             it.getString("password"),
                             it.getString("email"),
-                            it.getString("password")));
+                            it.getString("phone")));
                 }
             }
         } catch (Exception e) {

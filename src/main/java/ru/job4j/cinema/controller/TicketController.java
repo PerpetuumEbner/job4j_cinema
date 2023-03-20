@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.sevice.FilmService;
 import ru.job4j.cinema.sevice.TicketService;
 
@@ -35,9 +36,11 @@ public class TicketController {
                              @ModelAttribute("ticket") Ticket ticket,
                              @RequestParam(name = "fail", required = false) Boolean fail,
                              HttpSession session) {
+        User userSession = (User) session.getAttribute("user");
         Ticket ticketSession = (Ticket) session.getAttribute("ticket");
         ticketSession.setRow(ticket.getRow());
         ticketSession.setCell(ticket.getCell());
+        ticketSession.setUser_id(userSession.getId());
         model.addAttribute("fail", fail != null);
         model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", filmService.findById(ticketSession.getFilmId()));
@@ -45,11 +48,10 @@ public class TicketController {
     }
 
     @PostMapping("/buyTicket")
-    public String buyTicket(Model model, HttpSession session) {
+    public String buyTicket(HttpSession session) {
         Ticket sessionTicket = (Ticket) session.getAttribute("ticket");
         Optional<Ticket> buyTicket = ticketService.add(sessionTicket);
-        if (buyTicket.isPresent()) {
-            model.addAttribute("message", "Место уже куплено!");
+        if (buyTicket.isEmpty()) {
             return "redirect:/ticketInfo?fail=true";
         }
         return "redirect:/films";

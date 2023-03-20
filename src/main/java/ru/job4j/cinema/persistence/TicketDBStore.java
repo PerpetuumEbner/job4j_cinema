@@ -30,6 +30,7 @@ public class TicketDBStore {
     }
 
     public Optional<Ticket> add(Ticket ticket) {
+        Optional<Ticket> optionalTicket = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO tickets(film_id, row, cell, user_id) VALUES (?, ?, ?, ?)",
@@ -45,10 +46,11 @@ public class TicketDBStore {
                     ticket.setId(id.getInt(1));
                 }
             }
+            optionalTicket = Optional.of(ticket);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return Optional.of(ticket);
+        return optionalTicket;
     }
 
     public Optional<Ticket> findById(int id) {

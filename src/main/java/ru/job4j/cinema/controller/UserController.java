@@ -37,7 +37,6 @@ public class UserController {
                                @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с таким именем уже существует!");
             return "redirect:/formAddUser?fail=true";
         }
         return "redirect:/films";
