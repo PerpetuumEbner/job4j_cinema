@@ -22,8 +22,9 @@ public class AuthFilter implements Filter {
                 || uri.endsWith("login")
                 || uri.endsWith("registration")
                 || uri.endsWith("Fail")
+                || uri.endsWith("formAddUser")
                 || uri.endsWith("films")
-                || uri.endsWith("addUser")) {
+                || uri.contains("posterFilm")) {
             chain.doFilter(req, res);
             return;
         }
