@@ -12,6 +12,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * В классе происходит обработка мест в зале в базе данных.
+ *
+ * @author yustas
+ * @version 1.0
+ */
 @Repository
 public class CinemaHallDBStore {
     private static final Logger LOG = LogManager.getLogger(UserDBStore.class);
@@ -22,6 +28,12 @@ public class CinemaHallDBStore {
         this.pool = pool;
     }
 
+    /**
+     * Поиск зала по Id.
+     *
+     * @param id Id зала.
+     * @return Найденный зал, иначе null.
+     */
     public CinemaHall findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM halls WHERE id = ?")
@@ -42,6 +54,11 @@ public class CinemaHallDBStore {
         return null;
     }
 
+    /**
+     * Поиск всех залов.
+     *
+     * @return Список найденныйх залов.
+     */
     public List<CinemaHall> findAll() {
         List<CinemaHall> halls = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -62,6 +79,12 @@ public class CinemaHallDBStore {
         return halls;
     }
 
+    /**
+     * Список всех рядов в зале найденныйх по Id.
+     *
+     * @param id Id зала.
+     * @return Список рядов в зале.
+     */
     public List<Integer> findAllRows(int id) {
         List<Integer> rows = new ArrayList<>();
         int count = findById(id).getRow();
@@ -71,6 +94,12 @@ public class CinemaHallDBStore {
         return rows;
     }
 
+    /**
+     * Список всех мест в зале найденныйх по Id.
+     *
+     * @param id Id зала.
+     * @return Список мест в зале.
+     */
     public List<Integer> findAllCell(int id) {
         List<Integer> cells = new ArrayList<>();
         int count = findById(id).getCell();

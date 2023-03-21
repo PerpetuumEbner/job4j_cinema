@@ -8,6 +8,12 @@ import ru.job4j.cinema.persistence.FilmDBStore;
 
 import java.util.List;
 
+/**
+ * Верхний слой хранилища FilmDBStore в котором находятся фильмы.
+ *
+ * @author yustas
+ * @version 1.0
+ */
 @ThreadSafe
 @Service
 public class FilmService {

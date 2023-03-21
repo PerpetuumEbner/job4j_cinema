@@ -6,11 +6,15 @@ import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.persistence.TicketDBStore;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Верхний слой хранилища TicketDBStore в котором находятся сеансы.
+ * Верхний слой хранилища TicketDBStore в котором находятся билеты.
  *
  * @author yustas
  * @version 1.0
@@ -35,5 +39,9 @@ public class TicketService {
 
     public List<Ticket> findAll() {
         return store.findAll();
+    }
+
+    public List<Ticket> findBuyUserTickets(int id) {
+        return store.findBuyUserTickets(id);
     }
 }

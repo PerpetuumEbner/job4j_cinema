@@ -12,6 +12,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * В классе происходит обработка фильмов в базе данных.
+ *
+ * @author yustas
+ * @version 1.0
+ */
 @Repository
 public class FilmDBStore {
     private static final Logger LOG = LogManager.getLogger(UserDBStore.class);
@@ -23,10 +29,10 @@ public class FilmDBStore {
     }
 
     /**
-     * Добавление параметров в фильм.
+     * Добавление фильма.
      *
-     * @param film Объект фильма.
-     * @return Объект фильма с добавленными параметрами.
+     * @param film Фильм, который необходимо добавитью.
+     * @return Добавленный фильм.
      */
     public Film add(Film film) {
         try (Connection cn = pool.getConnection();
@@ -50,7 +56,7 @@ public class FilmDBStore {
     }
 
     /**
-     * Поиск объекта фильма по id.
+     * Поиск фильма по id.
      *
      * @param id Id фильма.
      * @return Объект фильма если найден по id иначе null.
@@ -76,9 +82,9 @@ public class FilmDBStore {
     }
 
     /**
-     * Поиск всех параметров фильма в базе данных.
+     * Поиск всех фильмов.
      *
-     * @return Список параметров фильма.
+     * @return Список фильмов.
      */
     public List<Film> findAll() {
         List<Film> posts = new ArrayList<>();

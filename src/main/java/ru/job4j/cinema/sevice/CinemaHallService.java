@@ -7,6 +7,12 @@ import ru.job4j.cinema.persistence.CinemaHallDBStore;
 
 import java.util.List;
 
+/**
+ * Верхний слой хранилища CinemaHallDBStore в котором находятся места в зале.
+ *
+ * @author yustas
+ * @version 1.0
+ */
 @ThreadSafe
 @Service
 public class CinemaHallService {

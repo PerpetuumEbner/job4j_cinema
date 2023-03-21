@@ -1,11 +1,9 @@
 package ru.job4j.cinema.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
+import java.util.PrimitiveIterator;
 
 /**
  * Модель описывающая билет.
@@ -13,7 +11,6 @@ import java.util.Objects;
  * @author yustas
  * @version 1.0
  */
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

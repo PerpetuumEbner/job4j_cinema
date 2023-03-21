@@ -54,6 +54,14 @@ public class TicketController {
         if (buyTicket.isEmpty()) {
             return "redirect:/ticketInfo?fail=true";
         }
-        return "redirect:/films";
+        return "redirect:/tickets";
+    }
+
+    @GetMapping("/tickets")
+    public String userTickets(Model model, HttpSession session) {
+        model.addAttribute("user", userHttpSession(session));
+        model.addAttribute("tickets", ticketService.findBuyUserTickets(userHttpSession(session).getId()));
+        model.addAttribute("films", filmService.findAll());
+        return "tickets";
     }
 }

@@ -29,6 +29,12 @@ public class UserDBStore {
         this.pool = pool;
     }
 
+    /**
+     * Добавление пользователя.
+     *
+     * @param user Пользователь, которого необходимо добавить
+     * @return Добавленный пользователь иначе Optional.
+     */
     public Optional<User> add(User user) {
         Optional<User> optionalUser = Optional.empty();
         try (Connection cn = pool.getConnection();
@@ -53,6 +59,12 @@ public class UserDBStore {
         return optionalUser;
     }
 
+    /**
+     * Поиск пользователя по id.
+     *
+     * @param id Id пользователя, которого необходимо найти.
+     * @return Объект пользователя если найден по id.
+     */
     public Optional<User> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE id = ?")
@@ -75,6 +87,11 @@ public class UserDBStore {
         return Optional.empty();
     }
 
+    /**
+     * Поиск всех пользователей.
+     *
+     * @return Список найденных пользователей.
+     */
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -98,6 +115,13 @@ public class UserDBStore {
         return users;
     }
 
+    /**
+     * Поиск пользователя по почте и паролю.
+     *
+     * @param email    Почта пользователя
+     * @param password Пароль пользователя.
+     * @return Пользователь, найденный по почте и паролю.
+     */
     public Optional<User> findUserByEmailAndPwd(String email, String password) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(

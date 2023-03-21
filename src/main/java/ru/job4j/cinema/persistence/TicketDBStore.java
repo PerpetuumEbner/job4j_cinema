@@ -9,6 +9,7 @@ import ru.job4j.cinema.model.Ticket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,12 @@ public class TicketDBStore {
         this.pool = pool;
     }
 
+    /**
+     * Добавление билета.
+     *
+     * @param ticket Билет, который необходимо добавить.
+     * @return Добавленный билет иначе Optional.
+     */
     public Optional<Ticket> add(Ticket ticket) {
         Optional<Ticket> optionalTicket = Optional.empty();
         try (Connection cn = pool.getConnection();
@@ -53,6 +60,12 @@ public class TicketDBStore {
         return optionalTicket;
     }
 
+    /**
+     * Поиск билета по Id.
+     *
+     * @param id Id билета.
+     * @return Объект билета если найден по Id иначе null.
+     */
     public Optional<Ticket> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
@@ -76,6 +89,11 @@ public class TicketDBStore {
         return Optional.empty();
     }
 
+    /**
+     * Поиск всех купленных билетов.
+     *
+     * @return Список билетов.
+     */
     public List<Ticket> findAll() {
         List<Ticket> tickets = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -98,5 +116,36 @@ public class TicketDBStore {
             LOG.error(e.getMessage(), e);
         }
         return tickets;
+    }
+
+    /**
+     * Поиск всех купленных билетов пользователя.
+     *
+     * @param id Id пользователя.
+     * @return Список билетов пользователя.
+     */
+    public List<Ticket> findBuyUserTickets(int id) {
+        List<Ticket> userTickets = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM tickets WHERE user_id = ?")
+        ) {
+            ps.setInt(1, id);
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    userTickets.add(
+                            new Ticket(
+                                    it.getInt("id"),
+                                    it.getInt("film_id"),
+                                    it.getInt("row"),
+                                    it.getInt("cell"),
+                                    it.getInt("user_id")
+                            )
+                    );
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return userTickets;
     }
 }

@@ -6,6 +6,12 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+/**
+ * Модель описывающая зал с местами.
+ *
+ * @author yustas
+ * @version 1.0
+ */
 @AllArgsConstructor
 @Getter
 @Setter
