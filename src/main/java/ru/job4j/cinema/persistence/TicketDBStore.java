@@ -9,7 +9,6 @@ import ru.job4j.cinema.model.Ticket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +25,11 @@ public class TicketDBStore {
 
     private final BasicDataSource pool;
 
-    public TicketDBStore(BasicDataSource pool) {
+    private final FilmDBStore filmDBStore;
+
+    public TicketDBStore(BasicDataSource pool, FilmDBStore filmDBStore) {
         this.pool = pool;
+        this.filmDBStore = filmDBStore;
     }
 
     /**
@@ -125,14 +127,14 @@ public class TicketDBStore {
      * @return Список билетов пользователя.
      */
     public List<Ticket> findBuyUserTickets(int id) {
-        List<Ticket> userTickets = new ArrayList<>();
+        List<Ticket> tickets = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM tickets WHERE user_id = ?")
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    userTickets.add(
+                    tickets.add(
                             new Ticket(
                                     it.getInt("id"),
                                     it.getInt("film_id"),
@@ -146,6 +148,20 @@ public class TicketDBStore {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return userTickets;
+        return tickets;
+    }
+
+    /**
+     * Поиск всех купленных билетов пользователя с добавлением названия фильма.
+     *
+     * @param id Id пользователя.
+     * @return Список билетов пользователя.
+     */
+    public List<Ticket> findBuyUserTicketsFilmName(int id) {
+        List<Ticket> tickets = new ArrayList<>(findBuyUserTickets(id));
+        for (Ticket ticket : tickets) {
+            ticket.setFilm(filmDBStore.findById(ticket.getFilmId()));
+        }
+        return tickets;
     }
 }

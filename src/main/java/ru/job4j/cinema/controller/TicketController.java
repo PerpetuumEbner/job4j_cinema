@@ -60,7 +60,7 @@ public class TicketController {
     @GetMapping("/tickets")
     public String userTickets(Model model, HttpSession session) {
         model.addAttribute("user", userHttpSession(session));
-        model.addAttribute("tickets", ticketService.findBuyUserTickets(userHttpSession(session).getId()));
+        model.addAttribute("tickets", ticketService.findBuyUserTicketsFilmName(userHttpSession(session).getId()));
         model.addAttribute("films", filmService.findAll());
         return "tickets";
     }

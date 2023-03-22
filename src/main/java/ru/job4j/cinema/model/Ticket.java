@@ -12,7 +12,6 @@ import java.util.PrimitiveIterator;
  * @version 1.0
  */
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Ticket {
@@ -25,6 +24,16 @@ public class Ticket {
     private int cell;
 
     private int user_id;
+
+    private Film film;
+
+    public Ticket(int id, int filmId, int row, int cell, int user_id) {
+        this.id = id;
+        this.filmId = filmId;
+        this.row = row;
+        this.cell = cell;
+        this.user_id = user_id;
+    }
 
     @Override
     public boolean equals(Object o) {

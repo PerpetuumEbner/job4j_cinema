@@ -35,6 +35,8 @@
                     Добавить фильм</a>
             </div>
         </div>
+        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/tickets}"
+           role="button">Мои билеты</a>
         <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
            role="button">Регистрация</a>
         <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
@@ -47,7 +49,7 @@
         </a>
     </nav>
     <div class="container pt-3">
-        <div class="card-body" style="width: 100%">
+        <div class="mx-auto pb-3" style="width: 800px;">
             <div class="form-group">
                 <table class="table hover">
                     <thead>
