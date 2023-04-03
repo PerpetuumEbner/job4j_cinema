@@ -60,7 +60,7 @@
                             Пользователь: <span th:text="${user.name}"></span>
                         </li>
                         <li class="list-group-item">
-                            Фильм: <span th:text="${film.name}"></span>
+                            Фильм: <span th:text="${film.get().name}"></span>
                         </li>
                         <li class="list-group-item">
                             Ряд: <span th:text="${ticket.getRow()}"></span>
@@ -71,7 +71,7 @@
                     </ul>
                     <div class="card-body">
                         <button type="submit" class="btn btn-outline-success">Купить</button>
-                        <a class="btn btn-outline-primary" th:href="@{|/place/${film.id}|}"
+                        <a class="btn btn-outline-primary" th:href="@{|/place/${film.get().id}|}"
                            role="button">Назад</a>
                         <a class="btn btn-outline-danger" th:href="@{|/films|}"
                            role="button">Отмена</a>

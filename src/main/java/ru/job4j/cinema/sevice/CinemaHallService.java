@@ -1,11 +1,13 @@
 package ru.job4j.cinema.sevice;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.CinemaHall;
-import ru.job4j.cinema.persistence.CinemaHallDBStore;
+import ru.job4j.cinema.persistence.Sql2oCinemaHallDBStore;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Верхний слой хранилища CinemaHallDBStore в котором находятся места в зале.
@@ -16,13 +18,14 @@ import java.util.List;
 @ThreadSafe
 @Service
 public class CinemaHallService {
-    private final CinemaHallDBStore cinemaHallDBStore;
+    private final Sql2oCinemaHallDBStore cinemaHallDBStore;
 
-    public CinemaHallService(CinemaHallDBStore cinemaHallDBStore) {
+    @Autowired
+    public CinemaHallService(Sql2oCinemaHallDBStore cinemaHallDBStore) {
         this.cinemaHallDBStore = cinemaHallDBStore;
     }
 
-    public CinemaHall findById(int id) {
+    public Optional<CinemaHall> findById(int id) {
         return cinemaHallDBStore.findById(id);
     }
 

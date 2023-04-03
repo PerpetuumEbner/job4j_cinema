@@ -4,9 +4,10 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Film;
-import ru.job4j.cinema.persistence.FilmDBStore;
+import ru.job4j.cinema.persistence.Sql2oFilmDBStore;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Верхний слой хранилища FilmDBStore в котором находятся фильмы.
@@ -17,18 +18,18 @@ import java.util.List;
 @ThreadSafe
 @Service
 public class FilmService {
-    private final FilmDBStore store;
+    private final Sql2oFilmDBStore store;
 
     @Autowired
-    public FilmService(FilmDBStore store) {
+    public FilmService(Sql2oFilmDBStore store) {
         this.store = store;
     }
 
-    public Film add(Film film) {
+    public Optional<Film> add(Film film) {
         return store.add(film);
     }
 
-    public Film findById(int id) {
+    public Optional<Film> findById(int id) {
         return store.findById(id);
     }
 

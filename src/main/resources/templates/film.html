@@ -64,16 +64,16 @@
                     <tr>
                         <td></td>
                         <td>
-                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.id}|}">
+                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.get().id}|}">
                         </td>
-                        <td th:text="${film.name}"></td>
-                        <td th:text="${film.productionYear}"></td>
+                        <td th:text="${film.get().name}"></td>
+                        <td th:text="${film.get().productionYear}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="card-body">
-                <a class="btn btn-outline-primary" th:href="@{|/place/${film.id}|}"
+                <a class="btn btn-outline-primary" th:href="@{|/place/${film.get().id}|}"
                    role="button">Выбрать место в зале</a>
             </div>
         </div>

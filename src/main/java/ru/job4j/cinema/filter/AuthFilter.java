@@ -7,9 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * В классе происходит проверка, чтобы только авторизованный пользователь мог покупать билеты.
+ */
 @Component
 public class AuthFilter implements Filter {
 
+    /**
+     * Метод проверки доступа.
+     *
+     * @param request  Определяет объект для предоставления сервлету информации о клиентском запросе.
+     * @param response Определяет объект, помогающий сервлету отправить ответ клиенту.
+     * @param chain    Объект, предоставляемый контейнером сервлета разработчику,
+     *                 дающий представление о цепочке вызовов отфильтрованного запроса на ресурс.
+     */
     @Override
     public void doFilter(
             ServletRequest request,

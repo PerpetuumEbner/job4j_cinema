@@ -1,9 +1,11 @@
 package ru.job4j.cinema.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.PrimitiveIterator;
 
 /**
  * Модель описывающая билет.
@@ -15,6 +17,14 @@ import java.util.PrimitiveIterator;
 @Getter
 @Setter
 public class Ticket {
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "film_id", "filmId",
+            "row", "row",
+            "cell", "cell",
+            "user_id", "userId"
+    );
+
     private int id;
 
     private int filmId;
@@ -23,16 +33,16 @@ public class Ticket {
 
     private int cell;
 
-    private int user_id;
+    private int userId;
 
     private Film film;
 
-    public Ticket(int id, int filmId, int row, int cell, int user_id) {
+    public Ticket(int id, int filmId, int row, int cell, int userId) {
         this.id = id;
         this.filmId = filmId;
         this.row = row;
         this.cell = cell;
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     @Override

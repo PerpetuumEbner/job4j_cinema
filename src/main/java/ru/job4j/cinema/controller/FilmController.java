@@ -18,8 +18,9 @@ import ru.job4j.cinema.sevice.FilmService;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
-import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+import static ru.job4j.cinema.filter.CheckHttpSession.userHttpSession;
 
 @ThreadSafe
 @Controller
@@ -82,11 +83,11 @@ public class FilmController {
 
     @GetMapping("/posterFilm/{adId}")
     public ResponseEntity<Resource> download(@PathVariable("adId") int id) {
-        Film film = filmService.findById(id);
-        return ResponseEntity.ok()
+        Optional<Film> film = filmService.findById(id);
+        return film.<ResponseEntity<Resource>>map(value -> ResponseEntity.ok()
                 .headers(new HttpHeaders())
-                .contentLength(film.getPoster().length)
+                .contentLength(value.getPoster().length)
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new ByteArrayResource(film.getPoster()));
+                .body(new ByteArrayResource(value.getPoster()))).orElse(null);
     }
 }

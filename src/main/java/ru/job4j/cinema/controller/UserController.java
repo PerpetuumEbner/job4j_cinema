@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+import static ru.job4j.cinema.filter.CheckHttpSession.userHttpSession;
 
 @ThreadSafe
 @Controller

@@ -16,7 +16,7 @@ import ru.job4j.cinema.sevice.TicketService;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ru.job4j.cinema.util.CheckHttpSession.userHttpSession;
+import static ru.job4j.cinema.filter.CheckHttpSession.userHttpSession;
 
 @ThreadSafe
 @Controller
@@ -40,7 +40,7 @@ public class TicketController {
         Ticket ticketSession = (Ticket) session.getAttribute("ticket");
         ticketSession.setRow(ticket.getRow());
         ticketSession.setCell(ticket.getCell());
-        ticketSession.setUser_id(userSession.getId());
+        ticketSession.setUserId(userSession.getId());
         model.addAttribute("fail", fail != null);
         model.addAttribute("user", userHttpSession(session));
         model.addAttribute("film", filmService.findById(ticketSession.getFilmId()));

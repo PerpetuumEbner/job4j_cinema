@@ -4,7 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.persistence.TicketDBStore;
+import ru.job4j.cinema.persistence.Sql2oTicketDBStore;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +18,10 @@ import java.util.Optional;
 @ThreadSafe
 @Service
 public class TicketService {
-    private final TicketDBStore store;
+    private final Sql2oTicketDBStore store;
 
     @Autowired
-    public TicketService(TicketDBStore store) {
+    public TicketService(Sql2oTicketDBStore store) {
         this.store = store;
     }
 

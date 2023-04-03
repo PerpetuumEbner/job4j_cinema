@@ -4,7 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.persistence.UserDBStore;
+import ru.job4j.cinema.persistence.Sql2oUserDBStore;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +18,10 @@ import java.util.Optional;
 @ThreadSafe
 @Service
 public class UserService {
-    private final UserDBStore store;
+    private final Sql2oUserDBStore store;
 
     @Autowired
-    public UserService(UserDBStore store) {
+    public UserService(Sql2oUserDBStore store) {
         this.store = store;
     }
 
