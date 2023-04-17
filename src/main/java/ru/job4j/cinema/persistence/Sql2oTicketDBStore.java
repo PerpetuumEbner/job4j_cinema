@@ -90,7 +90,7 @@ public class Sql2oTicketDBStore {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM tickets WHERE user_id = :userId");
             query.addParameter("userId", id);
-            return query.executeAndFetch(Ticket.class);
+            return query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetch(Ticket.class);
         }
     }
 
