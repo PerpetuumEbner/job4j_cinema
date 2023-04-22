@@ -62,6 +62,19 @@ public class Sql2oFilmDBStore {
     }
 
     /**
+     * Поиск названия фильма по id.
+     *
+     * @param id Id фильма.
+     * @return Объект фильма.
+     */
+    public Film findByName(int id) {
+        try (var connection = sql2o.open()) {
+            var query = connection.createQuery("SELECT name FROM films WHERE id = :id");
+            return query.addParameter("id", id).executeAndFetchFirst(Film.class);
+        }
+    }
+
+    /**
      * Поиск всех фильмов.
      *
      * @return Список фильмов.

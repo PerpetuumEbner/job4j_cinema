@@ -24,6 +24,7 @@ import static ru.job4j.cinema.filter.CheckHttpSession.userHttpSession;
 
 @ThreadSafe
 @Controller
+@RequestMapping("/films")
 public class FilmController {
     private final FilmService filmService;
 
@@ -36,14 +37,14 @@ public class FilmController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @GetMapping("/films")
+    @GetMapping
     public String films(Model model, HttpSession session) {
         model.addAttribute("user", userHttpSession(session));
         model.addAttribute("films", filmService.findAll());
         return "films";
     }
 
-    @GetMapping("/films/{filmId}")
+    @GetMapping("/{filmId}")
     public String formSelectionHall(Model model,
                                     @PathVariable("filmId") int filmId,
                                     HttpSession session) {

@@ -31,13 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/formAddFilm}">
+                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/films/formAddFilm}">
                     Добавить фильм</a>
             </div>
         </div>
-        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/tickets}"
+        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/films/tickets}"
            role="button">Мои билеты</a>
-        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
+        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/films/formAddUser}"
            role="button">Регистрация</a>
         <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
             <span th:text="${user.name}"></span>
@@ -64,7 +64,7 @@
                         <tr th:each="film: ${films}">
                             <td>
                                 <a th:href="@{|/films/${film.id}|}">
-                                    <img th:width="150" th:high="150" th:src="@{|/posterFilm/${film.id}|}">
+                                    <img th:width="150" th:high="150" th:src="@{|/films/posterFilm/${film.id}|}">
                                 </a>
                             </td>
                             <td th:text="${film.name}"></td>

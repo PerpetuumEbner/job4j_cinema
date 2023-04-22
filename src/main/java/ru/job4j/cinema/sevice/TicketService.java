@@ -3,6 +3,7 @@ package ru.job4j.cinema.sevice;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.job4j.cinema.dto.TicketDAO;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.persistence.Sql2oTicketDBStore;
 
@@ -29,19 +30,11 @@ public class TicketService {
         return store.add(ticket);
     }
 
-    public Optional<Ticket> findById(int id) {
-        return store.findById(id);
-    }
-
     public List<Ticket> findAll() {
         return store.findAll();
     }
 
-    public List<Ticket> findBuyUserTickets(int id) {
-        return store.findBuyUserTickets(id);
-    }
-
-    public List<Ticket> findBuyUserTicketsFilmName(int id) {
+    public List<TicketDAO> findBuyUserTicketsFilmName(int id) {
         return store.findBuyUserTicketsFilmName(id);
     }
 }

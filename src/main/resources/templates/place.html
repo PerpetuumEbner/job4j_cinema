@@ -31,13 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/formAddFilm}">
+                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/films/formAddFilm}">
                     Добавить фильм</a>
             </div>
         </div>
-        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/tickets}"
+        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/films/tickets}"
            role="button">Мои билеты</a>
-        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
+        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/films/formAddUser}"
            role="button">Регистрация</a>
         <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
             <span th:text="${user.name}"></span>
@@ -64,7 +64,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.get().id}|}">
+                            <img th:width="150" th:high="200" th:src="@{|/films/posterFilm/${film.get().id}|}">
                         </td>
                         <td th:text="${film.get().name}"></td>
                         <td th:text="${film.get().productionYear}"></td>
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="mx-auto pb-3" style="width: 800px;">
-            <form th:action="@{/ticketInfo}" method="GET">
+            <form th:action="@{/films/ticketInfo}" method="GET">
                 <div class="form-group">
                     <label for="row">Выберите ряд</label>
                     <select class="form-control" id="row" name="row">

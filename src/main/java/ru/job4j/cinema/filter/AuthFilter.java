@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
 
 /**
  * В классе происходит проверка, чтобы только авторизованный пользователь мог покупать билеты.
@@ -29,13 +30,18 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
-        if (uri.endsWith("loginPage")
-                || uri.endsWith("login")
-                || uri.endsWith("registration")
-                || uri.endsWith("Fail")
-                || uri.endsWith("formAddUser")
-                || uri.endsWith("films")
-                || uri.contains("posterFilm")) {
+        Set<String> strings = new HashSet<>();
+        strings.add("loginPage");
+        strings.add("login");
+        strings.add("registration");
+        strings.add("Fail");
+        strings.add("films");
+        strings.add("posterFilm");
+        Optional<String> stringOptional = strings
+                .stream()
+                .filter(uri::contains)
+                .findAny();
+        if (stringOptional.isPresent()) {
             chain.doFilter(req, res);
             return;
         }

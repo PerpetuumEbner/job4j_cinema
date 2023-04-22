@@ -3,8 +3,8 @@ CREATE TABLE users
     id       SERIAL PRIMARY KEY,
     name     VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    email    VARCHAR NOT NULL UNIQUE,
-    phone    VARCHAR NOT NULL UNIQUE
+    email    VARCHAR NOT NULL,
+    phone    VARCHAR NOT NULL
 );
 
 ALTER TABLE users

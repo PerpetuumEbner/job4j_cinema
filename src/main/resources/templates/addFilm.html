@@ -31,11 +31,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/formAddFilm}">
+                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/films/formAddFilm}">
                     Добавить фильм</a>
             </div>
         </div>
-        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
+        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/films/formAddUser}"
            role="button">Регистрация</a>
         <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
             <span th:text="${user.name}"></span>
@@ -53,7 +53,7 @@
                     Добавление фильма
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/createFilm}" class="was-validated" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/films/createFilm}" class="was-validated" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="0"/>
                         <div class="form-group">
                             <label for="name">Название</label>

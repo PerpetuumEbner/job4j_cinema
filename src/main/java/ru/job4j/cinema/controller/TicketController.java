@@ -4,10 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.sevice.FilmService;
@@ -20,6 +17,7 @@ import static ru.job4j.cinema.filter.CheckHttpSession.userHttpSession;
 
 @ThreadSafe
 @Controller
+@RequestMapping("/films")
 public class TicketController {
     private final TicketService ticketService;
 
@@ -52,9 +50,9 @@ public class TicketController {
         Ticket sessionTicket = (Ticket) session.getAttribute("ticket");
         Optional<Ticket> buyTicket = ticketService.add(sessionTicket);
         if (buyTicket.isEmpty()) {
-            return "redirect:/ticketInfo?fail=true";
+            return "redirect:/films/ticketInfo?fail=true";
         }
-        return "redirect:/tickets";
+        return "redirect:/films/tickets";
     }
 
     @GetMapping("/tickets")

@@ -31,13 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/formAddFilm}">
+                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/films/formAddFilm}">
                     Добавить фильм</a>
             </div>
         </div>
-        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/tickets}"
+        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/films/tickets}"
            role="button">Мои билеты</a>
-        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
+        <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/films/formAddUser}"
            role="button">Регистрация</a>
         <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
             <span th:text="${user.name}"></span>
@@ -62,7 +62,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="ticket: ${tickets}">
-                            <td th:text="${ticket.film.name}"></td>
+                            <td th:text="${ticket.name}"></td>
                             <td th:text="${ticket.row}"></td>
                             <td th:text="${ticket.cell}"></td>
                         </tr>

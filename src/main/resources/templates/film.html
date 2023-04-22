@@ -31,11 +31,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/films}">Сегодня в кино</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/formAddFilm}">
+                <a class="nav-item nav-link" th:if="${user.name == 'admin'}" th:href="@{/films/formAddFilm}">
                     Добавить фильм</a>
             </div>
         </div>
-        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/tickets}"
+        <a class="btn btn-outline-primary" th:if="${user.name != 'Гость'}" th:href="@{/films/tickets}"
            role="button">Мои билеты</a>
         <a class="btn btn-outline-primary" th:if="${user.name == 'Гость'}" th:href="@{/formAddUser}"
            role="button">Регистрация</a>
@@ -64,7 +64,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <img th:width="150" th:high="200" th:src="@{|/posterFilm/${film.get().id}|}">
+                            <img th:width="150" th:high="200" th:src="@{|/films/posterFilm/${film.get().id}|}">
                         </td>
                         <td th:text="${film.get().name}"></td>
                         <td th:text="${film.get().productionYear}"></td>
@@ -73,7 +73,7 @@
                 </table>
             </div>
             <div class="card-body">
-                <a class="btn btn-outline-primary" th:href="@{|/place/${film.get().id}|}"
+                <a class="btn btn-outline-primary" th:href="@{|/films/place/${film.get().id}|}"
                    role="button">Выбрать место в зале</a>
             </div>
         </div>

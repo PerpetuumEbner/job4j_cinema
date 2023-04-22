@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
+import ru.job4j.cinema.dto.TicketDAO;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Ticket;
 
@@ -100,13 +101,13 @@ public class Sql2oTicketDBStore {
      * @param id Id пользователя.
      * @return Список билетов пользователя.
      */
-    public List<Ticket> findBuyUserTicketsFilmName(int id) {
+    public List<TicketDAO> findBuyUserTicketsFilmName(int id) {
         List<Ticket> tickets = new ArrayList<>(findBuyUserTickets(id));
+        List<TicketDAO> ticketDAO = new ArrayList<>();
         for (Ticket ticket : tickets) {
-            Optional<Film> optionalFilm = sql2oFilmDBStore.findById(ticket.getFilmId());
-            optionalFilm.ifPresent(ticket::setFilm);
-
+            Film filmName = sql2oFilmDBStore.findByName(ticket.getFilmId());
+            ticketDAO.add(new TicketDAO(filmName.getName(), ticket.getCell(), ticket.getRow()));
         }
-        return tickets;
+        return ticketDAO;
     }
 }

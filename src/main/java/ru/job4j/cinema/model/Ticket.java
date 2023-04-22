@@ -35,8 +35,6 @@ public class Ticket {
 
     private int userId;
 
-    private Film film;
-
     public Ticket(int id, int filmId, int row, int cell, int userId) {
         this.id = id;
         this.filmId = filmId;
