@@ -13,6 +13,7 @@ import java.util.*;
  */
 @Component
 public class AuthFilter implements Filter {
+    private final List<String> ACCESS_LIST = Arrays.asList("loginPage", "login", "registration", "Fail", "films", "posterFilm");
 
     /**
      * Метод проверки доступа.
@@ -30,18 +31,10 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
-        Set<String> strings = new HashSet<>();
-        strings.add("loginPage");
-        strings.add("login");
-        strings.add("registration");
-        strings.add("Fail");
-        strings.add("films");
-        strings.add("posterFilm");
-        Optional<String> stringOptional = strings
+        boolean access = ACCESS_LIST
                 .stream()
-                .filter(uri::contains)
-                .findAny();
-        if (stringOptional.isPresent()) {
+                .anyMatch(uri::contains);
+        if (access) {
             chain.doFilter(req, res);
             return;
         }
